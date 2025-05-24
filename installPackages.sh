@@ -17,6 +17,10 @@ echo "Please enter EC2 public DNS:"
 read ec2dns
 profile="devops_user"
 
+#keyname=/home/elridge/devops_demo.pem
+#actual key is at "\\wsl.localhost\Ubuntu-22.04\home\elridge\devops_demo.pem" but this will not work in the script in linux script .
+# Also note ~/devops_demo.pem will work wehn connecting directly to the EC2 instance but not in the script from cli using ssh -t -i $keyname $ec2user@$ec2dns but in script it wont work.
+
 # Check if EC2 is running; if not, start it
 ec2status=$(aws ec2 describe-instance-status --instance-ids $ec2id --output text --region $region --profile $profile | grep INSTANCESTATE | awk '{print $3}')
 echo "EC2 status: $ec2status"
